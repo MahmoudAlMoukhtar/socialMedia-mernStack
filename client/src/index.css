@@ -1,0 +1,22 @@
+  body {
+     background-color: #eceaea;
+ }
+ .posts::-webkit-scrollbar {
+     display: none;
+ }
+
+ 
+
+
+.child {
+  float: left;
+  height: 40vh;
+  
+}
+
+.child.featured {
+  height: 80vh;
+
+}
+
+
