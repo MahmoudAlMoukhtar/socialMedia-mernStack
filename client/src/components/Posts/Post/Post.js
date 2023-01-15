@@ -79,10 +79,7 @@ const Post = ({post}) => {
         </div>
         {(user?.resulte?.googleId === post?.creator ||
           user?.resulte?._id === post?.creator) && (
-          <button
-            className="flex flex-col items-end relative"
-            onBlur={() => setShowDropDown(false)}
-          >
+          <div className="flex flex-col items-end relative">
             <BsThreeDots
               size={25}
               className="cursor-pointer"
@@ -109,7 +106,7 @@ const Post = ({post}) => {
                 />
               </button>
             </ul>
-          </button>
+          </div>
         )}
       </div>
       <Link to={`/posts/${post._id}`}>

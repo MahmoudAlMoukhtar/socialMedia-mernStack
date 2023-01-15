@@ -1,6 +1,9 @@
 import axios from "axios";
 
-const API = axios.create({baseURL: "http://localhost:3001/api"});
+const API = axios.create({
+  baseURL:
+    "https://socialmedia-mernstack-izsrkumsm-mahmoudalmoukhtar.vercel.app/api",
+});
 
 API.interceptors.request.use(req => {
   if (localStorage.getItem("profile")) {
