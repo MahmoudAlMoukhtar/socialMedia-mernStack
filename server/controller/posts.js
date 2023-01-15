@@ -29,7 +29,7 @@ const createPost = async (req, res) => {
 
   const newPost = new PostMessage({
     ...post,
-    selectedFile: req.file.originalname,
+    //selectedFile: req.file.originalname,
     creator: req.userId,
     createdAt: new Date().toISOString(),
     comments: [],

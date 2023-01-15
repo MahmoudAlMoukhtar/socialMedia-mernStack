@@ -22,7 +22,7 @@ const Form = ({postId, setPostId}) => {
     formData.append("name", user?.resulte?.fullName);
     formData.append("message", postData.message);
     formData.append("tags", postData.tags);
-    formData.append("image", postData.selectedFile);
+    //formData.append("image", postData.selectedFile);
     //let formDataObject = Object.fromEntries(formData.entries());
     //dispatch(createPost({...postData, name: user?.resulte?.name}));
     dispatch(createPost(formData));

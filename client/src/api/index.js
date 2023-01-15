@@ -1,8 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL:
-    "https://socialmedia-mernstack-izsrkumsm-mahmoudalmoukhtar.vercel.app/api",
+  baseURL: "https://socialmedia-mernstack.vercel.app/api",
 });
 
 API.interceptors.request.use(req => {
