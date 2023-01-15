@@ -23,12 +23,16 @@ const getPostById = async (req, res) => {
 };
 
 const createPost = async (req, res) => {
-  const post = req.body;
+  const {title, userImage, name, message, tags} = req.body;
   //console.log(req.file);
-  //console.log(req.userId);
+  //console.log(post);
 
   const newPost = new PostMessage({
-    ...post,
+    title,
+    userImage,
+    name,
+    message,
+    tags,
     //selectedFile: req.file.originalname,
     creator: req.userId,
     createdAt: new Date().toISOString(),

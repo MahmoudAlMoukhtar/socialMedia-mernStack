@@ -22,12 +22,12 @@ var storage = multer.diskStorage({
   },
 });
 var upload = multer({storage: storage});
-
+/* ,  */
 router.get("/", getPosts);
 
 router.get("/:id", getPostById);
 
-router.post("/", authMW, createPost);
+router.post("/", authMW, upload.single("image"), createPost);
 
 router.patch("/:id", authMW, updatePost);
 router.patch("/:id/likePost", authMW, likePost);

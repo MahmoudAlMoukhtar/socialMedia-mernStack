@@ -16,13 +16,13 @@ const Form = ({postId, setPostId}) => {
     e.preventDefault();
 
     const formData = new FormData();
-    console.log("fromHandle", postData);
+    //console.log("fromHandle", postData);
     formData.append("title", postData.title);
     formData.append("userImage", user?.resulte?.imageProfile);
     formData.append("name", user?.resulte?.fullName);
     formData.append("message", postData.message);
     formData.append("tags", postData.tags);
-    //formData.append("image", postData.selectedFile);
+    formData.append("image", postData.selectedFile);
     //let formDataObject = Object.fromEntries(formData.entries());
     //dispatch(createPost({...postData, name: user?.resulte?.name}));
     dispatch(createPost(formData));

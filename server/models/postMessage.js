@@ -13,15 +13,16 @@ const postSchema = mongoose.Schema({
   creator: {
     type: String,
   },
+  // selectedFile: {
+  //   type: String,
+  // },
   message: {
     type: String,
   },
   tags: {
     type: [String],
   },
-  // selectedFile: {
-  //   type: String,
-  // },
+
   likes: {
     type: [String],
     default: [],
@@ -39,3 +40,9 @@ const postSchema = mongoose.Schema({
 const PostMessage = mongoose.model("PostMessage", postSchema);
 
 module.exports = PostMessage;
+
+/* 
+  selectedFile: {
+    type: String,
+  },
+*/

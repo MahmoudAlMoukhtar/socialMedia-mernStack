@@ -3,7 +3,7 @@ import axios from "axios";
 const API = axios.create({
   baseURL: "https://socialmedia-mernstack.vercel.app/api",
 });
-
+/*  */
 API.interceptors.request.use(req => {
   if (localStorage.getItem("profile")) {
     req.headers.Authorization = `Bearer ${
@@ -35,4 +35,4 @@ export const updateProfile = (id, updates) =>
 //notify
 export const addNotify = notify => API.post(`/notify`, notify);
 export const fetchNotifycations = () => API.get("/notify");
-export const updateNotifycations = id => API.put(`/notify/${id}`);
+export const updateNotifycations = id => API.get(`/notify/${id}`);
