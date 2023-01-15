@@ -9,7 +9,7 @@ const {
   commentPost,
   removeCommentPost,
 } = require("../controller/posts");
-const authMW = require("../middleware/authMw");
+const authMW = require("../middleware/authMW.js");
 const multer = require("multer");
 const router = express.Router();
 
