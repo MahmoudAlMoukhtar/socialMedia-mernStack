@@ -24,18 +24,24 @@ const Navbar = () => {
   //console.log(user.resulte.imageProfile);
   return (
     <div className="flex justify-between items-center bg-[#214252] text-white py-2 font-semibold px-6 lg:px-8">
+      <Link to="/" className="text-3xl">
+        Blogy.
+      </Link>
       <nav className="flex gap-4 items-end">
-        <Link to="/" className="text-3xl">
-          Blogy.
-        </Link>
-        <Link to="/" className="text-sm">
+        <Link to="/" className="text-sm text-gray-300">
           Home
         </Link>
-        <Link to="/" className="text-sm">
+        <Link to="/" className="text-sm text-gray-300">
           Pages
         </Link>
-        <Link to="/" className="text-sm">
+        <Link to="/" className="text-sm text-gray-300">
           Culture
+        </Link>
+        <Link to="/" className="text-sm text-gray-300">
+          Business
+        </Link>
+        <Link to="/" className="text-sm text-gray-300">
+          Politics
         </Link>
       </nav>
 
@@ -59,8 +65,8 @@ const Navbar = () => {
             <ul
               className={
                 showDropDown
-                  ? "text-black bg-white rounded p-2 absolute mt-6 flex flex-col items-center gap-2 shadow-lg border border-black w-[250px]"
-                  : "text-black bg-white rounded p-2 absolute hidden mt-4 flex flex-col gap-2"
+                  ? "text-black bg-white rounded absolute right-20 mt-6 flex flex-col items-center gap-2 shadow-lg border border-black w-[250px] z-40"
+                  : "text-black bg-white rounded absolute hidden mt-4 flex flex-col gap-2"
               }
             >
               {notifyies.length > 0 &&
@@ -70,7 +76,7 @@ const Navbar = () => {
                       dispatch(updateNotifycations(noty._id));
                       history.push(noty.url);
                     }}
-                    className="flex flex-col gap-2 shadow-md border-b-[0.5px] border-gray-400 p-1"
+                    className="flex flex-col gap-2 shadow-md border-b-[0.5px] border-gray-400 p-2 w-full"
                   >
                     <img
                       src={noty.image}

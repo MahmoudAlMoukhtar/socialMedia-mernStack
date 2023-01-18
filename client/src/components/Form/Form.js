@@ -2,36 +2,61 @@ import React, {useState} from "react";
 import FileBase from "react-file-base64";
 import {useDispatch} from "react-redux";
 import {createPost, updatePost} from "../../actions/posts";
+import * as api from "../../api/index";
 const Form = ({postId, setPostId}) => {
   const [postData, setPostData] = useState({
     title: "",
     message: "",
     tags: "",
+    category: [],
     selectedFile: "",
   });
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
 
+  const handleUpload = e => {
+    const file = e.target.files[0];
+    const validFileTypes = ["image/jpg", "image/jpeg", "image/png"];
+    if (!validFileTypes.find(type => type === file.type)) {
+      setError("File must be in JPG/PNG format");
+      return;
+    } else {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        setPostData({...postData, selectedFile: reader.result});
+      };
+      //setPostData({...postData, selectedFile: file});
+    }
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
+    if (!postData.selectedFile) return;
 
     const formData = new FormData();
-    //console.log("fromHandle", postData);
     formData.append("title", postData.title);
     formData.append("userImage", user?.resulte?.imageProfile);
     formData.append("name", user?.resulte?.fullName);
     formData.append("message", postData.message);
     formData.append("tags", postData.tags);
     formData.append("image", postData.selectedFile);
-    //let formDataObject = Object.fromEntries(formData.entries());
-    //dispatch(createPost({...postData, name: user?.resulte?.name}));
+    formData.append("category", postData.category);
+
+    //upload images
     dispatch(createPost(formData));
+
+    //console.log("imageBase64String", postData.selectedFile);
+    //dispatch(createPost(formData));
+    //let formDataObject = Object.fromEntries(formData.entries());
     /* if(postId){
           dispatch(updatePost(postId, postData))
         }else{
           
         } */
   };
+
   const clear = () => {
     setPostData({title: "", message: "", tags: "", selectedFile: ""});
   };
@@ -72,6 +97,26 @@ const Form = ({postId, setPostId}) => {
             className="block w-full h-8 flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
             onChange={e => {
               setPostData({...postData, title: e.target.value});
+            }}
+          />
+        </div>
+      </div>
+      <div className="w-full">
+        <label
+          htmlFor="Category"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Category
+        </label>
+        <div className="mt-1">
+          <input
+            id="Category"
+            name="Category"
+            placeholder="Category"
+            value={postData.category}
+            className="block w-full h-8 flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+            onChange={e => {
+              setPostData({...postData, category:[ e.target.value]});
             }}
           />
         </div>
@@ -119,7 +164,9 @@ const Form = ({postId, setPostId}) => {
           />
         </div>
       </div>
+      {postData.selectedFile && <img src={postData.selectedFile} />}
       <div className="w-full">
+        {error && <h1 className="text-red-700 font-semibold">{error}</h1>}
         <label
           htmlFor="tags"
           className="block text-sm font-medium text-gray-700"
@@ -131,10 +178,9 @@ const Form = ({postId, setPostId}) => {
             type="file"
             id="image"
             name="image"
+            htmlFor="image"
             className="block w-full h-8 flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            onChange={e => {
-              setPostData({...postData, selectedFile: e.target.files[0]});
-            }}
+            onChange={handleUpload}
           />
         </div>
       </div>

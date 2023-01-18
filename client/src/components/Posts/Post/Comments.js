@@ -58,7 +58,7 @@ const Comments = ({post}) => {
               <div className="flex flex-col flex-wrap gap-2 rounded-lg p-2 w-full">
                 <div className="flex items-start justify-start gap-6">
                   <img
-                    src={`/${c.image}`}
+                    src={`${c.image}`}
                     alt="user profile"
                     className="rounded-full w-12"
                   />
@@ -87,7 +87,7 @@ const Comments = ({post}) => {
               </div>
             ))
           ) : (
-            <p>not Comments exist</p>
+            <p>Not Comments exist</p>
           )}
         </div>
       </div>

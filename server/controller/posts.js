@@ -1,7 +1,9 @@
 const {default: mongoose} = require("mongoose");
 const PostMessage = require("../models/postMessage");
+const {cloudinary} = require("../utils/cloudinary");
 
 const getPosts = async (req, res) => {
+  const {resources} = await cloudinary.search.expression();
   try {
     const postMessage = await PostMessage.find().sort({_id: -1});
     res.status(200).json(postMessage);
@@ -23,23 +25,25 @@ const getPostById = async (req, res) => {
 };
 
 const createPost = async (req, res) => {
-  const {title, userImage, name, message, tags} = req.body;
-  //console.log(req.file);
-  //console.log(post);
-
-  const newPost = new PostMessage({
-    title,
-    userImage,
-    name,
-    message,
-    tags,
-    //selectedFile: req.file.originalname,
-    creator: req.userId,
-    createdAt: new Date().toISOString(),
-    comments: [],
-  });
-  //console.log(newPost);
+  const {title, userImage, name, message, tags, category, image} = req.body;
   try {
+    const uploadedCloudniary = await cloudinary.uploader.upload(image, {
+      upload_preset: "ml_default",
+    });
+    console.log(uploadedCloudniary);
+    const newPost = new PostMessage({
+      title,
+      userImage,
+      name,
+      message,
+      tags,
+      category,
+      selectedFile: uploadedCloudniary.url,
+      //selectedFile: req.file.originalname,
+      creator: req.userId,
+      createdAt: new Date().toISOString(),
+      comments: [],
+    });
     await newPost.save();
     res.status(201).json(newPost);
   } catch (err) {

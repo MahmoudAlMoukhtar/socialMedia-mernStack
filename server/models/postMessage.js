@@ -13,9 +13,15 @@ const postSchema = mongoose.Schema({
   creator: {
     type: String,
   },
-  // selectedFile: {
-  //   type: String,
-  // },
+  category: {
+    type: [String],
+    default: ["ALL"],
+  },
+  selectedFile: {
+    type: String,
+    default:
+      "/depositphotos_137014128-stock-illustration-user-profile-icon.jpg",
+  },
   message: {
     type: String,
   },

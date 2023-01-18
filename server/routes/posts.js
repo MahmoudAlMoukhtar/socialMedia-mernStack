@@ -13,14 +13,15 @@ const authMW = require("../middleware/authMW.js");
 const multer = require("multer");
 const router = express.Router();
 
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "/path/to/temporary/directory/to/store/uploaded/files");
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname);
-  },
-});
+// var storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, "/path/to/temporary/directory/to/store/uploaded/files");
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, file.originalname);
+//   },
+// });
+var storage = multer.memoryStorage();
 var upload = multer({storage: storage});
 /* ,  */
 router.get("/", getPosts);

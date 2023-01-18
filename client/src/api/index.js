@@ -1,9 +1,10 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://socialmedia-mernstack.vercel.app/api",
+  baseURL: "http://localhost:3001/api",
 });
-/*  */
+/* baseURL: "https://socialmedia-mernstack.vercel.app/api", */
+/*  https://socialmedia-mernstack.vercel.app/api*/
 API.interceptors.request.use(req => {
   if (localStorage.getItem("profile")) {
     req.headers.Authorization = `Bearer ${

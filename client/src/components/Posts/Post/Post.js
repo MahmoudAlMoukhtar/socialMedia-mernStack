@@ -11,13 +11,12 @@ import {Link} from "react-router-dom";
 const Post = ({post}) => {
   const [showDropDown, setShowDropDown] = useState(false);
   const dispatch = useDispatch();
-
   const user = JSON.parse(localStorage.getItem("profile"));
 
   const handleDelete = id => {
-    //console.log(id);
     dispatch(deletePost(id));
   };
+
   const handleUpdateLike = id => {
     dispatch(likePost(id));
   };
@@ -60,9 +59,8 @@ const Post = ({post}) => {
       />
     );
   };
-  //console.log(post);
   return (
-    <div className="shadow-lg p-2 flex flex-col justify-center gap-4 rounded-xl bg-white w-full max-w-[600px]">
+    <div className="shadow-2xl p-2 flex flex-col justify-start gap-4 rounded bg-white w-full max-w-[500px] h-[600px]">
       <div className="flex justify-between">
         <div className="flex  justify-center items-center gap-2 text-[#848d92]">
           <img
@@ -116,16 +114,11 @@ const Post = ({post}) => {
               ? post.selectedFile
               : "Placeholder_view_vector.svg.png"
           }
-          className="rounded-2xl"
+          className="rounded-2xl w-full h-96"
         />
       </Link>
-      <h1 className="text-[#4D4C7D] text-2xl">{post.title}</h1>
-      <p>{post.message}</p>
-      <div className="flex justify-between items-center">
-        {post.tags.map(tag => (
-          <p>#{tag}</p>
-        ))}
-      </div>
+      <h1 className="text-[#4D4C7D] text-lg font-semibold">{post.title}</h1>
+      <p>{post.message.slice(0, 40)}</p>
 
       <div className="flex justify-between border-t-[1px] border-gray-300 py-2 rounded">
         <Likes post={post} />
